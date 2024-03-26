@@ -273,12 +273,6 @@ class Migrations
         ModelMigration::setup($optionStack->getOption('config')->database, $optionStack->getOption('verbose'));
         self::connectionSetup($optionStack->getOptions());
 
-        // Everything is up to date
-        if ($initialVersion->getStamp() === $finalVersion->getStamp()) {
-            print Color::info('Everything is up to date');
-            exit(0);
-        }
-
         $direction = ModelMigration::DIRECTION_FORWARD;
         if ($finalVersion->getStamp() < $initialVersion->getStamp()) {
             $direction = ModelMigration::DIRECTION_BACK;
